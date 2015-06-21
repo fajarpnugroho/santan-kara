@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class ViewVideoFragment extends Fragment implements RecordMovieActionTake
     @InjectView(R.id.videoview) VideoView videoView;
 
     private Controller controller;
+    private DisplayMetrics dm;
 
     @Override
     public void onAttach(Activity activity) {
@@ -30,6 +32,8 @@ public class ViewVideoFragment extends Fragment implements RecordMovieActionTake
         }
         controller = (Controller) activity;
         controller.registerActionTaker(this);
+        dm = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
     }
 
     @Override
@@ -50,24 +54,24 @@ public class ViewVideoFragment extends Fragment implements RecordMovieActionTake
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        videoView.setMinimumHeight(dm.heightPixels);
+        videoView.setMinimumWidth(dm.widthPixels);
+        videoView.setMediaController(new MediaController(getActivity()));
         controller.showVideo();
     }
 
     @OnClick(R.id.button_delete)
-    void onButtonDeleteClick () {
-        controller.deleteVideo();
-    }
+    void onButtonDeleteClick () { controller.deleteVideo(); }
 
     @OnClick(R.id.button_save)
-    void onButtonSaveClick() {
-        controller.saveVideo();
-    }
+    void onButtonSaveClick() { controller.saveVideo(); }
 
     @Override
     public void showMovie(Uri videoUri) {
         if (videoView != null) {
             videoView.setVideoURI(videoUri);
-            videoView.setMediaController(new MediaController(getActivity()));
+            videoView.seekTo(1);
+            videoView.requestFocus();
         }
     }
 

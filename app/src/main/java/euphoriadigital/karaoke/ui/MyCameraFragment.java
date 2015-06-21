@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import euphoriadigital.karaoke.R;
 
-public class MyCameraFragment extends CameraFragment {
+public class MyCameraFragment extends CameraFragment implements CameraActionTaker {
     @InjectView(R.id.camera) CameraView cameraView;
     @InjectView(R.id.action) CompoundButton action;
     @InjectView(R.id.chronometer) Chronometer chronometer;
@@ -33,6 +33,14 @@ public class MyCameraFragment extends CameraFragment {
             throw new ClassCastException("Activity must implement " + Controller.class);
         }
         controller = (Controller) activity;
+        controller.registerActionTaker(this);
+    }
+
+    @Override
+    public void onDetach() {
+        controller.unregisterActionTaker();
+        controller = null;
+        super.onDetach();
     }
 
     @Override
@@ -51,26 +59,44 @@ public class MyCameraFragment extends CameraFragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 if (checked) {
-                    try {
-                        record();
-                        chronometer.start();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    controller.record();
                 } else {
-                    try {
-                        stopRecording();
-                        chronometer.stop();
-                        controller.navigateToViewVideoAcitivity();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    controller.stop();
                 }
             }
         });
     }
 
+    @Override
+    public void startRecordVideo() {
+        try {
+            record();
+            chronometer.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void stopRecordVideo() {
+        try {
+            stopRecording();
+            chronometer.stop();
+            controller.navigateToViewVideoAcitivity();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public interface Controller {
         void navigateToViewVideoAcitivity();
+
+        void record();
+
+        void stop();
+
+        void registerActionTaker(CameraActionTaker actionTaker);
+
+        void unregisterActionTaker();
     }
 }
