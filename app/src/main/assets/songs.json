@@ -5,25 +5,12 @@
       "artist": {
         "name": "endank soekamti",
         "album": "kolaborase album",
-        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
+        "cover": "https://i1.sndcdn.com/artworks-000097798789-4ydeo2-large.jpg"
       },
       "song": {
         "title": "syubidu",
         "duration": "5:30",
         "url": "syubidu.mp3"
-      }
-    },
-    {
-      "id": "5",
-      "artist": {
-        "name": "OM PMR",
-        "album": "something",
-        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
-      },
-      "song": {
-        "title": "antara cinta dan dusta",
-        "duration": "3:30",
-        "url": "antara_cinta_dan_dusta.mp3"
       }
     }
   ]
