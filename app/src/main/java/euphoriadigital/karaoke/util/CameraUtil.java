@@ -48,16 +48,16 @@ public final class CameraUtil {
 
     /** Create a file Uri for saving an image or video */
     private static Uri getOutputMediaFileUri(int type){
-        return Uri.fromFile(getOutputMediaFile(type));
+        return Uri.fromFile(getOutputMediaFile(type, true));
     }
 
     /** Create a File for saving an image or video */
-    private static File getOutputMediaFile(int type){
+    public static File getOutputMediaFile(int type, boolean overideName){
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
 
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "SantanKara");
+                Environment.DIRECTORY_MOVIES), "SantanKara");
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 
@@ -67,6 +67,10 @@ public final class CameraUtil {
                 Log.d("MyCameraApp", "failed to create directory");
                 return null;
             }
+        }
+
+        if (!overideName) {
+            return mediaStorageDir;
         }
 
         // Create a media file name
