@@ -1,5 +1,6 @@
 package euphoriadigital.karaoke.ui;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,18 @@ public class MyCameraFragment extends CameraFragment {
     @InjectView(R.id.action) CompoundButton action;
     @InjectView(R.id.chronometer) Chronometer chronometer;
 
+    private Controller controller;
+
     public MyCameraFragment() {}
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (!(activity instanceof Controller)) {
+            throw new ClassCastException("Activity must implement " + Controller.class);
+        }
+        controller = (Controller) activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +61,7 @@ public class MyCameraFragment extends CameraFragment {
                     try {
                         stopRecording();
                         chronometer.stop();
+                        controller.navigateToViewVideoAcitivity();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -57,4 +70,7 @@ public class MyCameraFragment extends CameraFragment {
         });
     }
 
+    public interface Controller {
+        void navigateToViewVideoAcitivity();
+    }
 }

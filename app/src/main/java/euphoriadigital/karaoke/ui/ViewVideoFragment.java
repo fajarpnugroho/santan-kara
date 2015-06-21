@@ -1,5 +1,6 @@
 package euphoriadigital.karaoke.ui;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +20,24 @@ public class ViewVideoFragment extends Fragment implements RecordMovieActionTake
 
     @InjectView(R.id.videoview) VideoView videoView;
 
+    private Controller controller;
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (!(activity instanceof Controller)) {
+            throw new ClassCastException("Activity must implement " + Controller.class);
+        }
+        controller = (Controller) activity;
+        controller.registerActionTaker(this);
+    }
+
+    @Override
+    public void onDetach() {
+        controller.unregisterActionTaker();
+        controller = null;
+        super.onDetach();
+    }
 
     @Nullable
     @Override
@@ -29,23 +47,33 @@ public class ViewVideoFragment extends Fragment implements RecordMovieActionTake
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        controller.showVideo();
+    }
+
     @OnClick(R.id.button_delete)
     void onButtonDeleteClick () {
-
+        controller.deleteVideo();
     }
 
     @OnClick(R.id.button_save)
     void onButtonSaveClick() {
-
+        controller.saveVideo();
     }
 
     @Override
     public void showMovie(Uri videoUri) {
-        videoView.setVideoURI(videoUri);
-        videoView.setMediaController(new MediaController(getActivity()));
+        if (videoView != null) {
+            videoView.setVideoURI(videoUri);
+            videoView.setMediaController(new MediaController(getActivity()));
+        }
     }
 
     public interface Controller {
+        void showVideo();
+
         void deleteVideo();
 
         void saveVideo();

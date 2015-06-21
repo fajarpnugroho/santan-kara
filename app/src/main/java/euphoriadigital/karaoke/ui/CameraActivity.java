@@ -1,5 +1,6 @@
 package euphoriadigital.karaoke.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -9,7 +10,9 @@ import com.commonsware.cwac.camera.SimpleCameraHost;
 
 import euphoriadigital.karaoke.util.CameraUtil;
 
-public class CameraActivity extends AppCompatActivity implements CameraHostProvider {
+import static euphoriadigital.karaoke.ui.MyCameraFragment.Controller;
+
+public class CameraActivity extends AppCompatActivity implements CameraHostProvider, Controller {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,4 +34,10 @@ public class CameraActivity extends AppCompatActivity implements CameraHostProvi
         return simpleCameraHost.build();
     }
 
+    @Override
+    public void navigateToViewVideoAcitivity() {
+        Intent intent = new Intent(this, ViewVideoActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

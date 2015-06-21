@@ -9,7 +9,9 @@ import android.util.Log;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public final class CameraUtil {
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -87,5 +89,32 @@ public final class CameraUtil {
         }
 
         return mediaFile;
+    }
+
+    public static List<File> getListVideo(File root) {
+        ArrayList<File> inFiles = new ArrayList<File>();
+        File[] files = root.listFiles();
+        for (File file : files) {
+            if (file.isDirectory()) {
+                inFiles.addAll(getListVideo(file));
+            } else {
+                if(file.getName().endsWith(".mp4")){
+                    inFiles.add(file);
+                }
+            }
+        }
+        return inFiles;
+    }
+
+    public static File getLastFileModified() {
+        File root = getOutputMediaFile(MEDIA_TYPE_VIDEO, false);
+        List<File> files = getListVideo(root);
+        File lastModifiedFile = files.get(0);
+        for (int i = 1; i < files.size(); i++) {
+            if (lastModifiedFile.lastModified() < files.get(i).lastModified()) {
+                lastModifiedFile = files.get(i);
+            }
+        }
+        return lastModifiedFile;
     }
 }
