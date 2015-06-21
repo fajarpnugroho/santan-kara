@@ -5,12 +5,12 @@
       "artist": {
         "name": "endank soekamti",
         "album": "kolaborase album",
-        "cover": "http://www.downloadlagump3terbarugratis.com/images/200271160/endank-soekamti-feat-jarwo.jpg"
+        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
       },
       "song": {
         "title": "syubidu",
         "duration": "5:30",
-        "url": ""
+        "url": "syubidu.mp3"
       }
     },
     {
@@ -18,12 +18,38 @@
       "artist": {
         "name": "someone",
         "album": "something",
-        "cover": "http://36.media.tumblr.com/53dbd76a8fe009029a54f536833c675b/tumblr_nht281Tqj61ssfl2xo1_500.png"
+        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
       },
       "song": {
         "title": "love me like you do",
         "duration": "3:30",
-        "url": ""
+        "url": "love_me_like_you_do.mp3"
+      }
+    },
+    {
+      "id": "3",
+      "artist": {
+        "name": "OM PMR",
+        "album": "something",
+        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
+      },
+      "song": {
+        "title": "topan (naif parody)",
+        "duration": "3:30",
+        "url": "topan.mp3"
+      }
+    },
+    {
+      "id": "4",
+      "artist": {
+        "name": "OM PMR",
+        "album": "something",
+        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
+      },
+      "song": {
+        "title": "antara cinta dan dusta",
+        "duration": "3:30",
+        "url": "antara_cinta_dan_dusta.mp3"
       }
     }
   ]

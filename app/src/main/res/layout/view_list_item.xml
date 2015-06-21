@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/selectableItemBackground"
     android:padding="16dp">
 
     <ImageView
@@ -12,25 +13,25 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:contentDescription="@null"
-        tools:src="@drawable/cover"/>
+        tools:src="@drawable/cover" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/cover"
         android:layout_toEndOf="@id/cover"
+        android:layout_toRightOf="@id/cover"
         android:orientation="vertical"
+        android:paddingEnd="0dp"
         android:paddingLeft="16dp"
-        android:paddingStart="16dp"
         android:paddingRight="0dp"
-        android:paddingEnd="0dp">
+        android:paddingStart="16dp">
 
         <TextView
             android:id="@+id/artist"
+            style="?attr/textAppearanceListItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?attr/textAppearanceListItem"
-            tools:text="Someone"/>
+            tools:text="Someone" />
 
         <android.widget.Space
             android:layout_width="wrap_content"
@@ -38,10 +39,10 @@
 
         <TextView
             android:id="@+id/title"
+            style="?attr/textAppearanceSearchResultTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?attr/textAppearanceSearchResultTitle"
-            tools:text="Love me like you do"/>
+            tools:text="Love me like you do" />
 
         <android.widget.Space
             android:layout_width="wrap_content"
@@ -49,10 +50,10 @@
 
         <TextView
             android:id="@+id/duration"
+            style="?attr/textAppearanceListItemSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?attr/textAppearanceListItemSmall"
-            tools:text="5:30"/>
+            tools:text="5:30" />
     </LinearLayout>
 
 
