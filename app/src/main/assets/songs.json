@@ -8,9 +8,22 @@
         "cover": "https://i1.sndcdn.com/artworks-000097798789-4ydeo2-large.jpg"
       },
       "song": {
-        "title": "syubidu",
+        "title": "syubidu full",
         "duration": "5:30",
-        "url": "syubidu.mp3"
+        "url": "syubidu_full.mp3"
+      }
+    },
+    {
+      "id": "2",
+      "artist": {
+        "name": "endank soekamti",
+        "album": "kolaborase album",
+        "cover": "https://i1.sndcdn.com/artworks-000097798789-4ydeo2-large.jpg"
+      },
+      "song": {
+        "title": "syubidu minus one",
+        "duration": "5:30",
+        "url": "syubidu_rmin_1.mp3"
       }
     }
   ]
