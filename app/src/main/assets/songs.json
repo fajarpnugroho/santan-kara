@@ -14,45 +14,6 @@
       }
     },
     {
-      "id": "2",
-      "artist": {
-        "name": "afrojack",
-        "album": "something",
-        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
-      },
-      "song": {
-        "title": "do or die (remix)",
-        "duration": "3:30",
-        "url": "do_or_die.mp3"
-      }
-    },
-    {
-      "id": "3",
-      "artist": {
-        "name": "someone",
-        "album": "something",
-        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
-      },
-      "song": {
-        "title": "love me like you do",
-        "duration": "3:30",
-        "url": "love_me_like_you_do.mp3"
-      }
-    },
-    {
-      "id": "4",
-      "artist": {
-        "name": "OM PMR",
-        "album": "something",
-        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
-      },
-      "song": {
-        "title": "topan (naif parody)",
-        "duration": "3:30",
-        "url": "topan.mp3"
-      }
-    },
-    {
       "id": "5",
       "artist": {
         "name": "OM PMR",
