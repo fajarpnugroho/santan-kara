@@ -10,6 +10,7 @@ import com.commonsware.cwac.camera.SimpleCameraHost;
 
 import euphoriadigital.karaoke.util.CameraUtil;
 
+import static com.commonsware.cwac.camera.CameraHost.*;
 import static euphoriadigital.karaoke.ui.MyCameraFragment.Controller;
 
 public class CameraActivity extends AppCompatActivity implements CameraHostProvider, Controller {
@@ -29,7 +30,8 @@ public class CameraActivity extends AppCompatActivity implements CameraHostProvi
                 new SimpleCameraHost.Builder(this)
                         .videoDirectory(CameraUtil
                                 .getOutputMediaFile(CameraUtil.MEDIA_TYPE_VIDEO, false))
-                        .useFullBleedPreview(true)
+                        .recordingHint(RecordingHint.VIDEO_ONLY)
+                        .mirrorFFC(false)
                         .useFrontFacingCamera(true);
         return simpleCameraHost.build();
     }
