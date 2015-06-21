@@ -1,0 +1,30 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "artist": {
+        "name": "endank soekamti",
+        "album": "kolaborase album",
+        "cover": "http://www.downloadlagump3terbarugratis.com/images/200271160/endank-soekamti-feat-jarwo.jpg"
+      },
+      "song": {
+        "title": "syubidu",
+        "duration": "5:30",
+        "url": ""
+      }
+    },
+    {
+      "id": "2",
+      "artist": {
+        "name": "someone",
+        "album": "something",
+        "cover": "http://36.media.tumblr.com/53dbd76a8fe009029a54f536833c675b/tumblr_nht281Tqj61ssfl2xo1_500.png"
+      },
+      "song": {
+        "title": "love me like you do",
+        "duration": "3:30",
+        "url": ""
+      }
+    }
+  ]
+}
