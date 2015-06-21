@@ -4,16 +4,8 @@
     android:layout_height="match_parent"
     tools:context=".RecordMovieFragment">
 
-    <Button
-        android:id="@+id/button_start"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/label_start" />
-
     <VideoView
         android:id="@+id/videoview"
-        android:layout_above="@id/button_start"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>
