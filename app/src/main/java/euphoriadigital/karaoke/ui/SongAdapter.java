@@ -23,36 +23,26 @@ public class SongAdapter extends BaseAdapter {
     private List<Songs.Data> songs;
     private Listener listener;
 
-    public void setListener(Listener listener) {
-        this.listener = listener;
-    }
+    public void setListener(Listener listener) { this.listener = listener; }
 
-    public SongAdapter(Context context) {
-        this.inflater = LayoutInflater.from(context);
-    }
+    public SongAdapter(Context context) { this.inflater = LayoutInflater.from(context); }
 
-    public void setSongs(List<Songs.Data> songs) {
-        this.songs = songs;
+    public void setSongs(List<Songs.Data> songs) { this.songs = songs; }
+
+    @Override
+    public int getCount() { return songs.size();
     }
 
     @Override
-    public int getCount() {
-        return songs.size();
-    }
+    public Songs.Data getItem(int position) { return songs.get(position); }
 
     @Override
-    public Songs.Data getItem(int position) {
-        return songs.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return songs.get(position).id;
-    }
+    public long getItemId(int position) { return songs.get(position).id; }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
+
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.view_list_item, parent, false);
             viewHolder = new ViewHolder(convertView);
@@ -74,7 +64,7 @@ public class SongAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onItemClickListener(getItemId(position));
+                listener.onItemClickListener(getItemId(position), getItem(position).song.url);
             }
         });
 
@@ -93,6 +83,6 @@ public class SongAdapter extends BaseAdapter {
     }
 
     public interface Listener {
-        void onItemClickListener(long id);
+        void onItemClickListener(long id, String song);
     }
 }

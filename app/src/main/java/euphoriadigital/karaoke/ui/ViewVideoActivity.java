@@ -31,7 +31,7 @@ public class ViewVideoActivity extends AppCompatActivity implements Controller {
     }
 
     @Override
-    public void showVideo() {
+    public void getLastModifiedVideo() {
         File file = CameraUtil.getLastFileModified();
         if (file.exists()) {
             Uri uri = Uri.fromFile(file);
@@ -79,7 +79,5 @@ public class ViewVideoActivity extends AppCompatActivity implements Controller {
     }
 
     @Override
-    public void unregisterActionTaker() {
-        actionTaker = null;
-    }
+    public void unregisterActionTaker() { actionTaker = null; }
 }

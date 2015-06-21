@@ -57,7 +57,7 @@ public class ViewVideoFragment extends Fragment implements RecordMovieActionTake
         videoView.setMinimumHeight(dm.heightPixels);
         videoView.setMinimumWidth(dm.widthPixels);
         videoView.setMediaController(new MediaController(getActivity()));
-        controller.showVideo();
+        controller.getLastModifiedVideo();
     }
 
     @OnClick(R.id.button_delete)
@@ -76,7 +76,7 @@ public class ViewVideoFragment extends Fragment implements RecordMovieActionTake
     }
 
     public interface Controller {
-        void showVideo();
+        void getLastModifiedVideo();
 
         void deleteVideo();
 

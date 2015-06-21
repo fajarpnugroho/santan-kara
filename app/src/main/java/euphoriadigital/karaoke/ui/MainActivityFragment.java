@@ -75,12 +75,12 @@ public class MainActivityFragment extends Fragment implements MainActionTaker, L
     }
 
     @Override
-    public void onItemClickListener(long id) {
-        controller.navigateToRecordMovie();
+    public void onItemClickListener(long id, String song) {
+        controller.navigateToRecordMovie(id, song);
     }
 
     public interface Controller {
-        void navigateToRecordMovie();
+        void navigateToRecordMovie(long id, String song);
 
         void loadJSONAssets();
 
