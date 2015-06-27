@@ -1,64 +1,104 @@
 package euphoriadigital.karaoke.ui;
 
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.hardware.Camera;
-import android.hardware.Camera.CameraInfo;
+import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.FrameLayout;
+import android.util.Log;
+import android.widget.Chronometer;
+import android.widget.Toast;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import java.io.IOException;
+
 import euphoriadigital.karaoke.R;
-import euphoriadigital.karaoke.ui.widget.CameraPreview;
+import euphoriadigital.karaoke.util.AssetsUtils;
+import euphoriadigital.karaoke.util.CameraUtil;
 
-public class MyCameraActivity extends AppCompatActivity {
+import static euphoriadigital.karaoke.ui.MyCameraActivityFragment.Controller;
 
-    @InjectView(R.id.camera_preview) FrameLayout preview;
+public class MyCameraActivity extends AppCompatActivity implements Controller {
 
-    private Camera mCamera;
-    private CameraPreview mPreview;
+    public static final String EXTRA_SONG = "extra_song";
+
+    private Bundle bundle;
+    private MediaPlayer mediaPlayer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_camera);
-        ButterKnife.inject(this);
 
-        // Create an instance of Camera
-        mCamera = getCameraInstance();
+        if (!CameraUtil.checkCameraHardware(this)) {
+            Toast.makeText(this, "You dont have camera", Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
-        // Create our Preview view and set it as the content of our activity.
-        mPreview = new CameraPreview(this);
-        mPreview.setCamera(mCamera);
-        mPreview.setmWindowManager(getWindowManager());
+        bundle = getIntent().getExtras();
 
-        preview.addView(mPreview);
+        mediaPlayer = new MediaPlayer();
     }
 
-    /** Check if this device has a camera */
-    private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
-            // this device has a camera
-            return true;
+    @Override
+    public void startRecordVideo(MyMediaRecorder myMediaRecorder) {
+        if (myMediaRecorder.prepareMediaRecorder()) {
+            myMediaRecorder.start();
         } else {
-            // no camera on this device
-            return false;
+            myMediaRecorder.releaseMediaRecorder();
+            myMediaRecorder.releaseCamera();
         }
     }
 
-    /** A safe way to get an instance of the Camera object. */
-    public static Camera getCameraInstance(){
-        Camera c = null;
+    @Override
+    public void stopRecordVideo(MyMediaRecorder myMediaRecorder) {
+        if (myMediaRecorder != null) {
+            myMediaRecorder.stop();
+            myMediaRecorder.releaseMediaRecorder();
+            myMediaRecorder.releaseCamera();
+        }
+    }
+
+    @Override
+    public void playAudio() {
+        if (bundle == null) { return; }
+
+        AssetFileDescriptor afd = AssetsUtils.openFileDescriptor(this, bundle.getString(EXTRA_SONG));
+
         try {
-            c = Camera.open(CameraInfo.CAMERA_FACING_FRONT); // attempt to get a Camera instance
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
+                    afd.getLength());
+            afd.close();
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            Log.e("TAG", "Could not open file " + afd.toString() + " for playback.", e);
         }
-        catch (Exception e){
-            // Camera is not available (in use or does not exist)
-        }
-        return c; // returns null if camera is unavailable
     }
 
+    @Override
+    public void stopAudio() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+    }
+
+    @Override
+    public void startChromometer(Chronometer chronometer) {
+        chronometer.start();
+    }
+
+    @Override
+    public void stopChronometer(Chronometer chronometer) {
+        chronometer.stop();
+    }
+
+    @Override
+    public void navigateToReviewVideo() {
+        Intent intent = new Intent(this, ViewVideoActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

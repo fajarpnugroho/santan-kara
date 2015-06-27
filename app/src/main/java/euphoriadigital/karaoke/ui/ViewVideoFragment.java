@@ -70,7 +70,7 @@ public class ViewVideoFragment extends Fragment implements RecordMovieActionTake
     public void showMovie(Uri videoUri) {
         if (videoView != null) {
             videoView.setVideoURI(videoUri);
-            videoView.seekTo(1);
+            videoView.seekTo(5);
             videoView.requestFocus();
         }
     }

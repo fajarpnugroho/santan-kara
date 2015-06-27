@@ -2,7 +2,6 @@ package euphoriadigital.karaoke.ui.widget;
 
 import android.content.Context;
 import android.hardware.Camera;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -12,16 +11,15 @@ import android.view.WindowManager;
 import java.io.IOException;
 
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
+
     private static final String TAG = "CameraPreview";
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private WindowManager mWindowManager;
 
-    public void setmWindowManager(WindowManager mWindowManager) {
-        this.mWindowManager = mWindowManager;
-    }
+    public int camera_orientation;
 
-    public CameraPreview(Context context) {
+    public CameraPreview(Context context, Camera mCamera, WindowManager mWindowManager) {
         super(context);
 
         // Install a SurfaceHolder.Callback so we get notified when the
@@ -30,22 +28,26 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         mHolder.addCallback(this);
         // deprecated setting, but required on Android versions prior to 3.0
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-    }
 
-    public void setCamera(Camera mCamera) {
         this.mCamera = mCamera;
+
+        this.mWindowManager = mWindowManager;
     }
 
-    public CameraPreview(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public SurfaceHolder getmHolder() {
+        return mHolder;
+    }
+
+    public Camera getmCamera() {
+        return mCamera;
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         // The Surface has been created, now tell the camera where to draw the preview.
         try {
-            mCamera.setPreviewDisplay(holder);
             setCameraDisplayOrientation();
+            mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
         } catch (IOException e) {
             Log.d(TAG, "Error setting camera preview: " + e.getMessage());
@@ -73,6 +75,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         } else {  // back-facing
             result = (info.orientation - degrees + 360) % 360;
         }
+
+        camera_orientation = result;
+
         mCamera.setDisplayOrientation(result);
     }
 
@@ -111,4 +116,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
     }
+
+
 }
