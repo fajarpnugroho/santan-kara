@@ -13,7 +13,7 @@ import butterknife.InjectView;
 import euphoriadigital.karaoke.R;
 import euphoriadigital.karaoke.ui.widget.CameraPreview;
 
-public class CameraActivity extends AppCompatActivity {
+public class MyCameraActivity extends AppCompatActivity {
 
     @InjectView(R.id.camera_preview) FrameLayout preview;
 
