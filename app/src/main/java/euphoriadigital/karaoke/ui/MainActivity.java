@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
 
     @Override
     public void navigateToRecordMovie() {
-        Intent intent = new Intent(this, RecordMovieActivity.class);
+        Intent intent = new Intent(this, CameraActivity.class);
         startActivity(intent);
     }
 
