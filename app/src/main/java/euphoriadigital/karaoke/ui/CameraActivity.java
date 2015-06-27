@@ -25,7 +25,6 @@ import static euphoriadigital.karaoke.ui.MyCameraFragment.Controller;
 public class CameraActivity extends AppCompatActivity implements CameraHostProvider, Controller {
 
     public static final String EXTRA_SONG = "extra_song";
-    public static final String EXTRA_ID = "extra_id";
     private CameraActionTaker actionTaker;
     private Bundle bundle;
     private MediaPlayer mediaPlayer;
@@ -71,6 +70,7 @@ public class CameraActivity extends AppCompatActivity implements CameraHostProvi
         AssetFileDescriptor afd = AssetsUtils.openFileDescriptor(this, bundle.getString(EXTRA_SONG));
 
         try {
+            assert afd != null;
             mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
                     afd.getLength());
             afd.close();

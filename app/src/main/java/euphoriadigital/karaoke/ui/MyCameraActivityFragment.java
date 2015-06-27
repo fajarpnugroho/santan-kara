@@ -24,6 +24,7 @@ import euphoriadigital.karaoke.service.MusicIntentReceiver.Listener;
 import euphoriadigital.karaoke.ui.widget.CameraPreview;
 import euphoriadigital.karaoke.util.CameraUtil;
 
+@SuppressWarnings("ALL")
 public class MyCameraActivityFragment extends Fragment implements Listener {
 
     @InjectView(R.id.camera_preview) FrameLayout preview;
@@ -38,7 +39,6 @@ public class MyCameraActivityFragment extends Fragment implements Listener {
 
     private MusicIntentReceiver musicIntentReceiver;
     private boolean headsetPlugged = false;
-    private boolean recording = false;
 
     @Override
     public void onAttach(Activity activity) {
@@ -89,9 +89,7 @@ public class MyCameraActivityFragment extends Fragment implements Listener {
 
         // Create our Preview view and set it as the content of our activity.
         mPreview = new CameraPreview(view.getContext(), mCamera, getActivity().getWindowManager());
-
         myMediaRecorder = new MyMediaRecorder(mPreview);
-
         preview.addView(mPreview);
 
     }
@@ -100,12 +98,10 @@ public class MyCameraActivityFragment extends Fragment implements Listener {
     void onButtonActionClick(CompoundButton view) {
         if (headsetPlugged) {
             if (view.isChecked()) {
-                recording = true;
                 controller.startRecordVideo(myMediaRecorder);
                 controller.startChromometer(chronometer);
                 controller.playAudio();
             } else {
-                recording = false;
                 controller.stopRecordVideo(myMediaRecorder);
                 controller.stopChronometer(chronometer);
                 controller.stopAudio();
@@ -125,16 +121,16 @@ public class MyCameraActivityFragment extends Fragment implements Listener {
     }
 
     @Override
-    public void onHeadSetPlugged() {
-        headsetPlugged = true;
-        Toast.makeText(getActivity(), "Ready to rock on", Toast.LENGTH_SHORT).show();
-    }
+    public void onHeadSetPlugged() { headsetPlugged = true; }
 
     @Override
     public void onHeadSetUnPlugged() {
-        headsetPlugged = false;
         buttonAction.setChecked(false);
-        Toast.makeText(getActivity(), "Ups, your headset is unplugged", Toast.LENGTH_SHORT).show();
+        headsetPlugged = false;
+        controller.stopRecordVideo(myMediaRecorder);
+        controller.stopChronometer(chronometer);
+        controller.stopAudio();
+        controller.navigateToReviewVideo();
     }
 
     public interface Controller {

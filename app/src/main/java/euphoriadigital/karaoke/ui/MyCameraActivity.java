@@ -67,6 +67,7 @@ public class MyCameraActivity extends AppCompatActivity implements Controller {
         AssetFileDescriptor afd = AssetsUtils.openFileDescriptor(this, bundle.getString(EXTRA_SONG));
 
         try {
+            assert afd != null;
             mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
                     afd.getLength());
             afd.close();

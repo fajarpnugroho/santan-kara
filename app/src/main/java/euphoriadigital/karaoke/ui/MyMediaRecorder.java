@@ -10,6 +10,7 @@ import java.io.IOException;
 import euphoriadigital.karaoke.ui.widget.CameraPreview;
 import euphoriadigital.karaoke.util.CameraUtil;
 
+@SuppressWarnings("ALL")
 public class MyMediaRecorder extends MediaRecorder {
     private CameraPreview mPreview;
     private Camera camera;

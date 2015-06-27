@@ -16,6 +16,7 @@ import euphoriadigital.karaoke.util.CameraUtil;
 
 import static euphoriadigital.karaoke.ui.ViewVideoFragment.Controller;
 
+@SuppressWarnings("ALL")
 public class ViewVideoActivity extends AppCompatActivity implements Controller {
 
     private RecordMovieActionTaker actionTaker;
