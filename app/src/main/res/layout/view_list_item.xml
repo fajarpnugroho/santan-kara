@@ -31,6 +31,7 @@
             style="?attr/textAppearanceListItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:capitalize="words"
             tools:text="Someone" />
 
         <android.widget.Space
@@ -42,6 +43,7 @@
             style="?attr/textAppearanceSearchResultTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:capitalize="words"
             tools:text="Love me like you do" />
 
         <android.widget.Space

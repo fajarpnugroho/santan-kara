@@ -6,9 +6,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.camera.front" />
-    <uses-feature android:name="android.hardware.microphone"/>
+    <uses-feature android:name="android.hardware.microphone" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -30,6 +31,15 @@
 
         <activity android:name=".ui.RecordMovieActivity" />
         <activity android:name=".ui.MyCameraActivity" />
+
+        <activity
+            android:name=".ui.CameraActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".ui.ViewVideoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

@@ -5,51 +5,25 @@
       "artist": {
         "name": "endank soekamti",
         "album": "kolaborase album",
-        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
+        "cover": "https://i1.sndcdn.com/artworks-000097798789-4ydeo2-large.jpg"
       },
       "song": {
-        "title": "syubidu",
+        "title": "syubidu full",
         "duration": "5:30",
-        "url": "syubidu.mp3"
+        "url": "syubidu_full.mp3"
       }
     },
     {
       "id": "2",
       "artist": {
-        "name": "someone",
-        "album": "something",
-        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
+        "name": "endank soekamti",
+        "album": "kolaborase album",
+        "cover": "https://i1.sndcdn.com/artworks-000097798789-4ydeo2-large.jpg"
       },
       "song": {
-        "title": "love me like you do",
-        "duration": "3:30",
-        "url": "love_me_like_you_do.mp3"
-      }
-    },
-    {
-      "id": "3",
-      "artist": {
-        "name": "OM PMR",
-        "album": "something",
-        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
-      },
-      "song": {
-        "title": "topan (naif parody)",
-        "duration": "3:30",
-        "url": "topan.mp3"
-      }
-    },
-    {
-      "id": "4",
-      "artist": {
-        "name": "OM PMR",
-        "album": "something",
-        "cover": "http://33.media.tumblr.com/avatar_f0ae4901c2b3_128.png"
-      },
-      "song": {
-        "title": "antara cinta dan dusta",
-        "duration": "3:30",
-        "url": "antara_cinta_dan_dusta.mp3"
+        "title": "syubidu minus one",
+        "duration": "5:30",
+        "url": "syubidu_rmin_1.mp3"
       }
     }
   ]

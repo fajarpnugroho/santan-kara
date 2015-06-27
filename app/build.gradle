@@ -1,6 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
+repositories {
+    maven {
+        url "https://repo.commonsware.com.s3.amazonaws.com"
+    }
+}
+
 
 android {
     compileSdkVersion 22
@@ -35,4 +41,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
 
     compile 'com.google.code.gson:gson:2.3'
+
+    compile 'com.commonsware.cwac:camera:0.6.+'
 }

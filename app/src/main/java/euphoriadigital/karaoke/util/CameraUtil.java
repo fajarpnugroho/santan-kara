@@ -11,7 +11,9 @@ import android.view.Surface;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public final class CameraUtil {
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -50,16 +52,16 @@ public final class CameraUtil {
 
     /** Create a file Uri for saving an image or video */
     private static Uri getOutputMediaFileUri(int type){
-        return Uri.fromFile(getOutputMediaFile(type));
+        return Uri.fromFile(getOutputMediaFile(type, true));
     }
 
     /** Create a File for saving an image or video */
-    private static File getOutputMediaFile(int type){
+    public static File getOutputMediaFile(int type, boolean overideName){
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
 
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "SantanKara");
+                Environment.DIRECTORY_MOVIES), "SantanKara");
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 
@@ -69,6 +71,10 @@ public final class CameraUtil {
                 Log.d("MyCameraApp", "failed to create directory");
                 return null;
             }
+        }
+
+        if (!overideName) {
+            return mediaStorageDir;
         }
 
         // Create a media file name
@@ -96,10 +102,18 @@ public final class CameraUtil {
                 .getRotation();
         int degrees = 0;
         switch (rotation) {
-            case Surface.ROTATION_0: degrees = 0; break;
-            case Surface.ROTATION_90: degrees = 90; break;
-            case Surface.ROTATION_180: degrees = 180; break;
-            case Surface.ROTATION_270: degrees = 270; break;
+            case Surface.ROTATION_0:
+                degrees = 0;
+                break;
+            case Surface.ROTATION_90:
+                degrees = 90;
+                break;
+            case Surface.ROTATION_180:
+                degrees = 180;
+                break;
+            case Surface.ROTATION_270:
+                degrees = 270;
+                break;
         }
 
         int result;
@@ -110,5 +124,32 @@ public final class CameraUtil {
             result = (info.orientation - degrees + 360) % 360;
         }
         camera.setDisplayOrientation(result);
+    }
+
+    public static List<File> getListVideo(File root) {
+        ArrayList<File> inFiles = new ArrayList<File>();
+        File[] files = root.listFiles();
+        for (File file : files) {
+            if (file.isDirectory()) {
+                inFiles.addAll(getListVideo(file));
+            } else {
+                if(file.getName().endsWith(".mp4")){
+                    inFiles.add(file);
+                }
+            }
+        }
+        return inFiles;
+    }
+
+    public static File getLastFileModified() {
+        File root = getOutputMediaFile(MEDIA_TYPE_VIDEO, false);
+        List<File> files = getListVideo(root);
+        File lastModifiedFile = files.get(0);
+        for (int i = 1; i < files.size(); i++) {
+            if (lastModifiedFile.lastModified() < files.get(i).lastModified()) {
+                lastModifiedFile = files.get(i);
+            }
+        }
+        return lastModifiedFile;
     }
 }
